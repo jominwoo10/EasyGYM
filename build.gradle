@@ -1,0 +1,35 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+}
+
+group = 'yuhan_3_2'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories{
+	mavenCentral()
+}
+
+dependencies {
+	runtimeOnly 'com.h2database:h2'
+	implementation'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.mariadb.jdbc',name:'mariadb-java-client',version:'2.4.1'
+	implementation 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation 'commons-io:commons-io:2.5'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

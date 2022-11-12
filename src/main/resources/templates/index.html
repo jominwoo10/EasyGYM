@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<a th:replace="fragments/common :: header"></a><!--헤더 프래그먼트 사용-->
+<body>
+<a th:replace="fragments/common :: navbar('home')"></a><!--네비바 프래그먼트 사용-->
+<a th:replace="fragments/common :: carousel"></a><!--케러셀 프래그먼트 사용-->
+
+<Style>
+.py-5{
+  position: relative;
+  top:-120px;
+}
+.hrStyle{
+ position: relative;
+  top:-120px;
+}
+body {
+
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-items: center;
+  align-items: center;
+  background-color: #3a3a3a;
+}
+  #main-holder {
+  width: 80%;
+  height: 85%;
+  position: relative;
+  left:170px;
+
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0px 0px 5px 2px black;
+}
+#top-video{
+position: relative;
+top:40px;
+}
+
+</Style>
+<main id="main-holder">
+<th:block>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h1 style="text-align:center; position:relative; top:30px;">Fitness Top four</h1>
+            <div class="row gx-1 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <!-- 나누는기준점-->
+
+                <div class="col mb-5"  th:each="GymPosition, i : ${gymHeartList} " id="top-video">
+                    <span th:if="${i.count<5}">
+                    <a th:href="@{/menu/gym-position/gym-view(id=${GymPosition.id})}">
+                        <div class="card h-70 ">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">TOP<span th:text="${i.count}"></span></div>
+                            <!-- Product video-->
+                            <video class="card-img-top" th:src="|/menu/gym-position/video/${GymPosition.id}|" th:poster="|/menu/gym-position/image/${GymPosition.id}|"  alt="..." /></video>
+                            <!-- Product details-->
+                            <div class="card-body p-4 ">
+                                <div class="text-center">
+                                    <!-- Product title-->
+                                    <h5 class="fw-bolder" th:text="${GymPosition.title}">제목</h5>
+                                    <span>좋아요:</span><span th:text="${GymPosition.gymHeartCount}"></span>
+                                    <span>조회수:</span><span th:text="${GymPosition.gymViewCount}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        </th:if>
+                    </a>
+                    </span>
+                </div>
+                <!--기준점 끝-->
+            </div>
+        </div>
+    </section>
+</th:block>
+<hr class="hrStyle">
+    <h1 style="text-align:center;position:relative; bottom:120px;">Fitness Top four</h1>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-sm-7"><br/><br/><br/><img src="img/dora.png" alt="" class="w-100"/></div>
+        <div class="col-sm-5">
+		<span class="text-center">
+		<h1>인기동영상</h1>
+		<p>&nbsp;&nbsp;&nbsp;카테고리</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;--헬스 자세/영상공유 게시판--</p>
+		</span>
+            <div class="row row-cols-2 my-3"> <!--  부트스트랩 2칸씩 나눠서 -->
+                <table class ="table table-striped" style="text-align: center;"border="1px" >
+                    <thead>
+                    <tr>
+                        <th>제목</th>
+                        <th>조회수</th>
+                        <th>좋아요</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="FreeHeartList: ${freeHeartList}"style="background-color: #eeeeee; text-align: center;">
+                        <td><a th:text="${FreeHeartList.title}" th:href="@{/menu/board/free-view(id=${FreeHeartList.id})}"style="background-color: #eeeeee; text-align: center;"></a></td>
+                        <td><a th:text="${FreeHeartList.viewCount}"></a></td>
+                        <td><a th:text="${FreeHeartList.heartCount}"></a></td>
+                        </span>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+<a th:replace="fragments/common :: footer"></a><!--푸터 프래그먼트 사용-->
+</body>
+</html>
