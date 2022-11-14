@@ -6,6 +6,8 @@
 <a th:replace="fragments/common :: positionNavbar(${gymPosition.position})"></a><!-- 포지션 네비바 프래그먼트 사용-->
 <a th:replace="fragments/common :: navbar('position')"></a><!--네비바 프래그먼트 사용-->
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 .quick_pos { position: relative; top:0px; min-width: 1300x; width: 100%; }
 .quick_pos .quick { position: absolute; top: 100px; left: 50%; z-index: 60; margin-left: 500px; }
 .quick_pos .quick.fixed { position: fixed; }
@@ -21,8 +23,16 @@
   }
 }
 .title{
-    max-width:100%;
-    text-align:center;
+    font-family: 'Jua', sans-serif;
+    font-size:60px;
+}
+.maintext{
+    font-family: 'Jua', sans-serif;
+    font-size:40px;
+}
+.writeview{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size:30px;
 }
   </style>
 <a th:replace="fragments/common :: navbar('position')"></a><!--네비바 프래그먼트 사용-->
@@ -56,8 +66,8 @@
 
 <br></br><br></br><br></br>
 
-<div class="title" style="position: absolute; left: 100px; top: 160px;">
-    <h1><span th:text="${gymPosition.title}"></span></h1>
+<div class="title" style="position: absolute; left: 50px; top: 160px;">
+    <span th:text="${gymPosition.title}"></span>
 </div>
 
 <div class="mainVideo"style="position: absolute; left: 50px; top: 210px;">
@@ -65,11 +75,22 @@
     <br>
     <video controls  th:src="|/menu/gym-position/video/${gymPosition.id}|" th:poster="|/menu/gym-position/image/${gymPosition.id}|" width="1350" height="700"></video>
     <br>
-    <span th:text="${gymPosition.content}"></span>
-    <span th:text="${gymPosition.method}"></span>
-    <span th:text="${gymPosition.effect}"></span>
-    <span th:text="${gymPosition.notes}"></span>
+    <span class="maintext">운동 설명</span>
     <br>
+    <span class="writeview" th:text="${gymPosition.content}"></span>
+    <br>
+    <span class="maintext">운동 방법</span>
+    <br>
+    <span class="writeview"th:text="${gymPosition.method}"></span>
+    <br>
+    <span class="maintext">운동 효과</span>
+    <br>
+    <span class="writeview"th:text="${gymPosition.effect}"></span>
+    <br>
+    <span class="maintext">운동시 주의점</span>
+    <br>
+    <span class="writeview"th:text="${gymPosition.notes}"></span>
+    <br><br>
     <span th:if="${not #strings.isEmpty(currentUser)}">
          <span th:if="${gymHeartCheck==1}">
                 <a type="button" th:href="@{/menu/gym-position/gym-heart/{id}(id=${gymPosition.id})}"><img src="../../../img/heart.png" alt=""></a>
@@ -86,6 +107,7 @@
             <input type="hidden" th:field="*{id}">
             <input  type="text" id="content" th:field="*{content}" th:errorclass="error-input" class="form-control" >
             <div class="d-block invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">제목내용메시지</div>
+            <br>
             <button id="submit" type="submit"class="btn btn-primary"style="float: right;" disabled>댓글</button>
         </div>
     </form>
@@ -95,7 +117,6 @@
 <span>좋아요:</span><span th:text="${#lists.size(gymHeartCount)}"></span>
 <div><input type="text"placeholder="좋아요 댓글은 로그인후 이용가능 합니다." class="form-control" onclick="location.href='http://localhost:8080/account/login'"></div>
 </span>
-
     <table class ="table table-striped" style="text-align: center;"border="1px" >
         <tr th:each="GymComment: ${gymCommentList}"style="background-color: #eeeeee; text-align: center;">
             <td th:text="${GymComment.user.username}"style="background-color: #eeeeee; text-align: left;"></td>
